@@ -50,10 +50,10 @@ const Card = () => {
                                     e.target.src = "https://starwars-visualguide.com/assets/img/placeholder.jpg";
                                 }} />
                             <div className="card-body">
-                                <p className="card-text"><strong>Nombre: </strong>{contact.full_name}</p>
+                                <p className="card-text"><strong>Name: </strong>{contact.full_name}</p>
                                 <p className="card-text"><strong>Email: </strong>{contact.email}</p>
                                 <p className="card-text"><strong>Phone: </strong>{contact.phone}</p>
-                                <p className="card-text"><strong>Adress: </strong>{contact.address}</p>
+                                <p className="card-text"><strong>Address: </strong>{contact.address}</p>
                             </div>
                         </div>
                     
