@@ -7,12 +7,13 @@ const Card = () => {
 
     const [contacts, setContacts] = useState([]);
 
-    useEffect (()=>{
+
+    useEffect(() => {
         getAllContacts();
     }, []);
 
 
-    
+
 
 
     const getAllContacts = () => {
@@ -24,8 +25,8 @@ const Card = () => {
         fetch("https://assets.breatheco.de/apis/fake/contact/agenda/jonathangutierrez-agenda", requestOptions)
             .then(response => response.json())
             .then(data => {
-                // Almacenar los resultados en el estado "characters"
-                console.log("DATOS DE LA API",data);
+
+                console.log("DATOS DE LA API", data);
                 setContacts(data);
             })
             .catch(error => console.log('error', error));
@@ -37,13 +38,14 @@ const Card = () => {
 
     return (
         <div className="row">
-        {/* Mapear todos los personajes en una card */}
-        {contacts.map((contact, index) => {
-            return (
-                <div key={contact.id} className="col-md-3 my-5">
-                    
+
+            {contacts.map((contact, index) => {
+
+                return (
+                    <div key={contact.id} className="col-md-3 my-5">
+
                         <div className="card" style={{ width: "18rem" }}>
-                        <img className="card-img-top" src={HomerImg} alt={contact.full_name} 
+                            <img className="card-img-top" src={HomerImg} alt={contact.full_name}
                                 onError={(e) => {
                                     // Si la imagen no se carga, reemplazarla por una imagen de marcador de posición
                                     e.target.onerror = null;
@@ -56,11 +58,11 @@ const Card = () => {
                                 <p className="card-text"><strong>Address: </strong>{contact.address}</p>
                             </div>
                         </div>
-                    
-                </div>
-            );
-        })}
-    </div>
+
+                    </div>
+                );
+            })}
+        </div>
     )
 }
 
