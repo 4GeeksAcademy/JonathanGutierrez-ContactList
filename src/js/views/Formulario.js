@@ -71,11 +71,7 @@ const Formulario = () => {
 
         console.log(result);
 
-        /**  setInputs([...inputs, newContact]);
-         setName("");
-         setEmail("");
-         setPhone("");
-         setAddress("");**/
+       
 
 
 

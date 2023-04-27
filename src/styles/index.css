@@ -1,3 +1,13 @@
-/* 
-    General Styles
-*/
+.card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.delete-button {
+  align-self: flex-start;
+}
+
+.edit-button {
+  align-self: flex-end;
+}

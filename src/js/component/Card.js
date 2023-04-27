@@ -90,15 +90,17 @@ const Card = () => {
                   {contact.address}
                 </p>
               </div>
-              <button onClick={() => deleteContact(contact.id)}>
+
+              <button onClick={() => deleteContact(contact.id)} className="delete-button">
                 <BsFillTrashFill />
               </button>
 
               <Link to={`/edit/${contact.id}`}>
-                <button>
+                <button className="edit-button">
                   <AiFillEdit />
                 </button>
               </Link>
+
             </div>
           </div>
         );
