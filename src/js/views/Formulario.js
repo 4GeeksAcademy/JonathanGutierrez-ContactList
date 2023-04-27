@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 
 
 
 const Formulario = () => {
 
+  const { id } = useParams();
 
   const [inputs, setInputs] = useState({});
 
@@ -12,14 +14,46 @@ const Formulario = () => {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    if (id) {
+      var requestOptions = {
+        method: "GET",
+        redirect: "follow",
+      };
+
+      fetch(
+        `https://assets.breatheco.de/apis/fake/contact/${id}`,
+        requestOptions
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("DATOS DEL CONTACTO", data);
+          setName(data.full_name);
+          setEmail(data.email);
+          setPhone(data.phone);
+          setAddress(data.address);
+          setIsEditing(true);
+        })
+        .catch((error) => console.log("error", error));
+    }
+  }, [id]);
+
+
 
   const handleAddContact = () => {
 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
+    const method = isEditing ? "PUT" : "POST";
+    const url = isEditing
+      ? `https://assets.breatheco.de/apis/fake/contact/${id}`
+      : "https://assets.breatheco.de/apis/fake/contact/";
+
     var requestOptions = {
-      method: 'POST',
+      method: method,
       headers: myHeaders,
       body: JSON.stringify({
         "full_name": name,
@@ -31,7 +65,7 @@ const Formulario = () => {
       redirect: 'follow'
     };
 
-    fetch("https://assets.breatheco.de/apis/fake/contact/", requestOptions)
+    fetch(url, requestOptions)
       .then(response => response.json())
       .then(result => {
 
@@ -123,7 +157,7 @@ const Formulario = () => {
         </div>
       </div>
       <button type="submit" onClick={handleAddContact} className="btn btn-primary">
-        Submit
+        {isEditing ? 'Editar Contacto' : 'Añadir Contacto'}
       </button>
     </form>
   );

@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from "react";
 import HomerImg from "../../img/foto perfil Homer.jpg";
 import { BsFillTrashFill } from "react-icons/bs";
+import { AiFillEdit } from "react-icons/ai";
+import { Link } from "react-router-dom";
+
 
 const Card = () => {
+
+
+
   const [contacts, setContacts] = useState([]);
+
 
   useEffect(() => {
     getAllContacts();
@@ -31,12 +38,11 @@ const Card = () => {
     console.log("Id a eliminar:", id);
 
     const requestOptions = {
-      method: 'DELETE',
+      method: "DELETE",
       headers: {
-        'Content-Type': 'application/json'
-      }
+        "Content-Type": "application/json",
+      },
     };
-
 
     fetch(`https://assets.breatheco.de/apis/fake/contact/${id}`, requestOptions)
       .then((response) => response.json())
@@ -87,6 +93,12 @@ const Card = () => {
               <button onClick={() => deleteContact(contact.id)}>
                 <BsFillTrashFill />
               </button>
+
+              <Link to={`/edit/${contact.id}`}>
+                <button>
+                  <AiFillEdit />
+                </button>
+              </Link>
             </div>
           </div>
         );
